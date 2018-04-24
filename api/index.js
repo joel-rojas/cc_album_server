@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import {sqlize} from './db';
 import {exec} from './seed';
 import routes from './routes';
+import * as aws from './aws';
 
 //Setup db server
 sqlize.authenticate()
