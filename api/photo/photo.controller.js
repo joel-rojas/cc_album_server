@@ -4,9 +4,8 @@ import {photoList, addPhoto} from '../aws';
 import { resolve } from 'path';
 
 export function list (req, res) {
-    Photo.findAll().then(response => {
-        const {data} = response;
-        return res.status(200).json({success: true, data});
+    Photo.findAll().then(photos => {
+        return res.status(200).json({success: true, data: photos});
     }).catch(err => {
         const errMsg = typeof err === 'object' ? JSON.stringify(err) : err;        
         return res.status(503).json({success: false, data: `Couldn't retrieve list of photos: ${errMsg}`});
