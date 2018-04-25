@@ -35,7 +35,7 @@ routes(app);
 
 // Start server
 const server = http.createServer(app);
-server.listen(9000, '127.0.0.1', () => {
+server.listen(9000, () => {
   console.log('Express server up and running');
 });
 
