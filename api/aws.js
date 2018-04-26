@@ -44,11 +44,12 @@ export function photoList() {
 export function addPhoto(file) {
     return new Promise((resolve, reject) => {
         const fileName = file.name;
+        const fileData = Buffer.from(file.data);
         const albumPhotosKey = `${encodeURIComponent(albumName)}//`;
         const photoKey = `${albumPhotosKey}${fileName}`;
         s3.upload({
             Key: photoKey,
-            Body: file,
+            Body: fileData,
             ACL: 'public-read'
         }, (err, data) => {
             if (err) { return reject({success: false, data: `There was an error uploading the photo: ${err}`}); }

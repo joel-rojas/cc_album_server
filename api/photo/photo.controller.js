@@ -13,7 +13,9 @@ export function list (req, res) {
 }
 export function add (req, res) {
     const bodyData = req.body;
-    const {name, description, file} = bodyData;
+    const files = req.files;
+    const file = files.file;
+    const {name, description} = bodyData;
     addPhoto(file).then(response => {
         const data = response.data;
         console.log(data);  

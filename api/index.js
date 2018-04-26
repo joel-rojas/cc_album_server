@@ -2,6 +2,7 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
+import fileUpload from 'express-fileupload';
 import {sqlize} from './db';
 import {exec} from './seed';
 import routes from './routes';
@@ -23,6 +24,10 @@ sqlize.authenticate()
 
 // Setup server
 const app = express();
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 }
+}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
